@@ -5,7 +5,7 @@
 		$scope.stations = stationList.stations;
 
 		$scope.refresh = function(zip) {
-			if (!$scope.zip) {return;}
+			if (!zip) {return;}
 			$('.overlay').fadeIn();
 			$('ul').fadeOut(function() {
 				stationList.stations.length = 0;
