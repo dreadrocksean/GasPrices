@@ -17,13 +17,7 @@ angular.module('gas', [])
 			'.json';
 	};
 
-	var refresh = function(zip) {
-		if (!zip) {return;}
-		$('.overlay').fadeIn();
-		$('ul').fadeOut(function() {
-			stations.length = 0;
-		});
-		
+	var refresh = function(zip, callback) {
 		return $http.get(getGeoUrl(zip)).success(function(data) {
 			var lat = data.results[0].geometry.location.lat;
 			var lng = data.results[0].geometry.location.lng;
@@ -31,8 +25,7 @@ angular.module('gas', [])
 				angular.forEach(data.stations, function(station) {
 			    	stations.push(station);
 				});
-				$('.overlay').fadeOut();
-				$('ul').fadeIn();
+				if (callback) {callback();}
 			});
 		});
 	};

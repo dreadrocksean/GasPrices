@@ -1,15 +1,18 @@
 (function(angular, $) {
 	angular.module('kineticChallenge', ['gas'])
 	.controller('StationListCtrl', ['$scope', 'stationList', function($scope, stationList) {
-		// $scope.zip = '66207';
 		$scope.stations = stationList.stations;
-		$scope.refresh = stationList.refresh;
-		$scope.refresh($scope.zip);
-	}]);
 
-	$('input[ng-model=zip]').keyup(function(event){
-	    if(event.keyCode === 13){
-	        $('button[type=submit]').click();
-	    }
-	});
+		$scope.refresh = function(zip) {
+			if (!$scope.zip) {return;}
+			$('.overlay').fadeIn();
+			$('ul').fadeOut(function() {
+				stationList.stations.length = 0;
+			});
+			stationList.refresh(zip, function() {
+				$('.overlay').fadeOut();
+				$('ul').fadeIn();
+			});
+		};
+	}]);
 })(window.angular, window.jQuery);
