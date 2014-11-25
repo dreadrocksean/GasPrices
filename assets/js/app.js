@@ -1,6 +1,6 @@
 (function(angular, $) {
 	'use strict';
-	angular.module('kineticChallenge', ['gas'])
+	angular.module('app', ['gas'])
 	.controller('StationListCtrl', ['$scope', 'stationList', function($scope, stationList) {
 		$scope.stations = stationList.stations;
 
